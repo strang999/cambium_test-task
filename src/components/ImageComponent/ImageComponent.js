@@ -1,15 +1,20 @@
+import PropTypes from 'prop-types';
+import { useContext } from "react";
+import { AppContext } from "../App/App";
 
-import '../../styles.scss';
-import { useContext } from 'react';
-import { AppContext } from '../App/App';
-function ImageComponent({ image, text }) {
+const ImageComponent = ({ image, text }) => {
     const opacity = useContext(AppContext);
     return (
-        <div className='item-container'>
-            <img className='image' style={{ opacity: opacity }} src={image} alt={text} />
-            <p className='image-text'> {text}</p>
+        <div className="item-container">
+            <img className="image" style={{ opacity }} src={image} alt={text} />
+            <p className="image-text"> {text}</p>
         </div>
-    )
-}
+    );
+};
 
-export default ImageComponent
+
+ImageComponent.propTypes = {
+    text: PropTypes.string,
+    image: PropTypes.string
+}
+export default ImageComponent;

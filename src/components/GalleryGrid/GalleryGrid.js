@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types';
 import ImageComponent from "../ImageComponent/ImageComponent"
 
-function GalleryGrid({ filteredData }) {
+const GalleryGrid = ({ filteredData }) => (
+    filteredData.map(({ image, text }) => (<ImageComponent key={text} image={image} text={text} />))
+);
 
-    console.log(filteredData[0]);
-    return (
-        filteredData && filteredData[0].map(item => {
-            const { image, text } = item;
-            return (<ImageComponent key={text} image={image} text={text} />)
-        })
-    )
+GalleryGrid.propTypes = {
+    filteredData: PropTypes.arrayOf(PropTypes.shape({
+        text: PropTypes.string,
+        image: PropTypes.string
+    }))
 }
 
-export default GalleryGrid
+export default GalleryGrid;

@@ -1,9 +1,11 @@
-function Searchbar({ handleSearch }) {
-    return (
-        <div className='searchbar-container'>
-            <input className='searchbar' type="text" placeholder='Search' onChange={(event) => handleSearch(event)} />
-        </div>
-    )
-}
+import PropTypes from 'prop-types';
 
-export default Searchbar
+const Searchbar = ({ onSearchHandle }) => (
+    <div className='searchbar-container'>
+        <input className='searchbar' type="text" placeholder='Search' onChange={(event) => onSearchHandle(event.target.value)} />
+    </div>)
+
+Searchbar.propTypes = {
+    onSearchHandle: PropTypes.func,
+}
+export default Searchbar;

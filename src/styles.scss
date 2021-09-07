@@ -1,6 +1,7 @@
 $header-height: 70px;
 $border-color: #adaaaa;
 $navbar-width: 250px;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -18,22 +19,23 @@ a:active {
 .layout-container {
   display: flex;
 }
-.searchbar-container {
-  text-align: center;
-  border-bottom: 2px solid $border-color;
-  height: 70px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background-color: white;
-  width: 100%;
-}
+
 .searchbar {
   width: 40%;
   padding: 5px 10px;
   margin: 20px auto;
   border: 2px solid $border-color;
+  &-container {
+    text-align: center;
+    border-bottom: 2px solid $border-color;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    width: 100%;
+  }
 }
 .navbar-container {
   min-width: $navbar-width;
@@ -57,10 +59,11 @@ a:active {
   align-items: center;
   flex-wrap: wrap;
   width: calc(100vw - #{$navbar-width});
+  &--no-results {
+    margin: 20px auto;
+  }
 }
-.grid-container--no-results {
-  margin: 20px auto;
-}
+
 .item-container {
   max-height: 300px;
   padding: 0 20 0 0px;
@@ -73,11 +76,12 @@ a:active {
   height: 250px;
   width: 250px;
   object-fit: cover;
+  &-text {
+    text-align: center;
+    margin: 10px;
+  }
 }
-.image-text {
-  text-align: center;
-  margin: 10px;
-}
+
 .categories-wrapper {
   margin: 20px 0;
 }
@@ -85,10 +89,11 @@ a:active {
   background-color: #fbe5d6;
   padding: 5px 10px;
   cursor: pointer;
+  &:nth-child(2n) {
+    background-color: #f8cbad;
+  }
 }
-.category-item:nth-child(2n) {
-  background-color: #f8cbad;
-}
+
 .opacity-control-container {
   display: flex;
   justify-content: space-evenly;

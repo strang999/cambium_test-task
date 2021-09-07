@@ -1,16 +1,16 @@
+import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { AppContext } from '../App/App';
 
-function Navbar({ handleOpacityChange, categories, handleSearch }) {
+const Navbar = ({ onOpacityChange, categories, onCategoryChange }) => {
     const opacity = useContext(AppContext);
-    console.log(categories);
+
     return (
         <nav className='navbar-container'>
             <div className='categories-wrapper'>
                 {
-                    categories.map(category => {
-                        return (<p className='category-item' key={category} onClick ={(e)=>handleSearch(e)}>{category}</p>)
-                    })
+                    categories.map(category => (<p className='category-item' key={category} onClick={() => onCategoryChange(category)}>{category}</p>)
+                    )
                 }
             </div>
             <div className='opacity-control-container'>
@@ -20,15 +20,20 @@ function Navbar({ handleOpacityChange, categories, handleSearch }) {
                         id='opacity-input-slider'
                         type='range'
                         value={opacity}
-                        min='0' max='1'
-                        onChange={handleOpacityChange}
+                        min='0'
+                        max='1'
+                        onChange={onOpacityChange}
                         step='0.01' />
                 </div>
-                <input value={opacity} type="text" placeholder='Opacity' id="opacity-text-input" onChange={handleOpacityChange} />
+                <input value={opacity} type="text" placeholder='Opacity' id="opacity-text-input" onChange={onOpacityChange} />
             </div>
         </nav>
 
     )
 }
-
-export default Navbar
+Navbar.propTypes = {
+    onOpacityChange: PropTypes.func,
+    categories: PropTypes.array,
+    onCategoryChange: PropTypes.func
+}
+export default Navbar;
