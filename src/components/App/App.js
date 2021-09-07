@@ -9,11 +9,13 @@ export const AppContext = react.createContext();
 function App() {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [opacity, setOpacity] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [opacity, setOpacity] = useState('');
   const [categories, setCategories] = useState([]);
 
   const handleSearch = (event) => {
-    const allowed = event.target.value || 'Butterfly';
+    console.log(event);
+    const allowed = event.target.value || event.target.innerText;
     const filtered = Object.values(Object.fromEntries(
       Object.entries(allData).filter(
         ([key, val]) => allowed.includes(key)
@@ -44,11 +46,17 @@ function App() {
 
   return (
     <AppContext.Provider value={opacity}>
-      <div>
-        <Searchbar handleSearch={handleSearch} />
-        <Navbar handleOpacityChange={handleOpacityChange} />
-        {filteredData.length > 0 ? <GalleryGrid filteredData={filteredData.length > 0 && filteredData} opacity={opacity} /> : <div>No Search Found</div>}
-      </div>
+      <>
+        <header>
+          <Searchbar handleSearch={handleSearch} />
+        </header>
+        <div className='layout-container'>
+          <Navbar categories={categories} handleSearch={handleSearch} handleOpacityChange={handleOpacityChange} />
+          <main className='grid-container'>
+            {filteredData.length > 0 ? <GalleryGrid filteredData={filteredData.length > 0 && filteredData} opacity={opacity} /> : <div className='grid-container--no-results'>No Search Found</div>}
+          </main>
+        </div>
+      </>
     </AppContext.Provider>
   );
 }
